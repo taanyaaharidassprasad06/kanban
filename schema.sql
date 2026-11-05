@@ -6,6 +6,7 @@ CREATE TABLE public.tasks (
         ON DELETE CASCADE,
 
     title TEXT NOT NULL,
+    
     description TEXT,
 
     status TEXT NOT NULL DEFAULT 'todo'
@@ -33,3 +34,8 @@ WITH CHECK (auth.uid() = user_id);
 -- Improve queries that filter by user and status
 CREATE INDEX idx_tasks_user_status
 ON public.tasks(user_id, status);
+
+-- Grant authenticated users permission to perform CRUD operations
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON public.tasks
+TO authenticated;
