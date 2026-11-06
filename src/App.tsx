@@ -36,7 +36,7 @@ function App() {
 	}
 	
 	return (
-		<div>
+		<div className="app">
 			<Board userId={user.id}/>
 		</div>
 	);

@@ -17,7 +17,7 @@ function Column({ id, title, tasks, onDrop, onDragStart, onSelectTask }: ColumnP
             onDragOver={(e) => e.preventDefault()} // by default dropping is not allowed so preventDefault() enables dropping
             onDrop={() => onDrop(id)} // calls onDrop() passed from parent so this is what updates the status of the task when task is dragged and dropped into a new column
         >
-            <div className={`col-info ${id}`}>
+            <div className="col-info">
                 <h3 className="col-name">{title}</h3>
                 <p className="task-amt">{tasks.length}</p>
             </div>

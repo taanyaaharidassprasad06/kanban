@@ -6,10 +6,10 @@ import { getTasks, createTask, updateTask, deleteTask } from "../services/taskSe
 import type { Task, TaskStatus, TaskPriority } from "../types/task";
 
 const cols: { id: TaskStatus; label: string }[] = [
-    { id: "todo", label: "To Do" },
-    { id: "in_progress", label: "In Progress" },
-    { id: "in_review", label: "In Review" },
-    { id: "done", label: "Done" },
+    { id: "todo", label: "TO DO" },
+    { id: "in_progress", label: "IN PROGRESS" },
+    { id: "in_review", label: "IN REVIEW" },
+    { id: "done", label: "DONE" },
 ];
 
 interface BoardProps {
@@ -21,6 +21,26 @@ function Board({ userId }: BoardProps) {
     const [modalOpen, setModalOpen] = useState(false);
     const [dragId, setDragId] = useState<string | null>(null); // stores which task is currently being dragged
     const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+
+    const totalTasks = tasks.length;
+
+    const completedTasks = tasks.filter(
+        (task) => task.status === "done"
+    ).length;
+
+    const inProgressTasks = tasks.filter(
+        (task) => task.status === "in_progress"
+    ).length;
+
+    const today = new Date();
+    const todayString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+
+    const overdueTasks = tasks.filter(
+        (task) =>
+            task.due_date &&
+            task.due_date < todayString &&
+            task.status !== "done"
+    ).length;
 
     // fetch user tasks when the board first loads
     useEffect(() => {
@@ -109,10 +129,31 @@ function Board({ userId }: BoardProps) {
     }
 
     return (
-        <div>
-            <div>
+        <>
+            <div className="board">
                 <div className="kanban-board">
                     <h1>Kanban Board</h1>
+                    <div className="board-summary">
+                        <div className="summary-card">
+                            <h4>Total Tasks</h4>
+                            <p>{totalTasks}</p>
+                        </div>
+
+                        <div className="summary-card">
+                            <h4>In Progress</h4>
+                            <p>{inProgressTasks}</p>
+                        </div>
+
+                        <div className="summary-card completed">
+                            <h4>Completed</h4>
+                            <p>{completedTasks}</p>
+                        </div>
+
+                        <div className="summary-card overdue">
+                            <h4>Overdue</h4>
+                            <p>{overdueTasks}</p>
+                        </div>
+                    </div>
                     <button className="add-task-btn" onClick={() => setModalOpen(!modalOpen)}>+ New Task</button>
                 </div>
                 {modalOpen && <TaskModal onAdd={addTask} onClose={() => setModalOpen(false)}/>}
@@ -133,7 +174,7 @@ function Board({ userId }: BoardProps) {
                 )}
             </div>
             
-        </div>
+        </>
     );
 }
 

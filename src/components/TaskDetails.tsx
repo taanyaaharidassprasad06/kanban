@@ -89,10 +89,11 @@ function TaskDetails({ task, onClose, onUpdate, onDelete }: TaskDetailsProps) {
                                 <option value="high">High</option>
                             </select>
                         </div>
-                        <button type="submit">Save Changes</button>
-                        <button type="button" onClick={() => setIsEditing(false)}>
-                            Cancel
-                        </button>
+                        <div className="details-modal-btn-container">
+                            <button className="details-btn modal-btn save-task-btn" type="submit">Save Changes</button>
+                            <button className="details-btn modal-btn" type="button" onClick={() => setIsEditing(false)}>Cancel</button>
+                        </div>
+                        
                     </form>
                 ) : (
                     <div className="details-content">
@@ -113,8 +114,10 @@ function TaskDetails({ task, onClose, onUpdate, onDelete }: TaskDetailsProps) {
                             <h4>Created</h4>
                             <p>{new Date(task.created_at).toLocaleDateString()}</p>
                         </div>
-                        <button onClick={() => setIsEditing(true)}>Edit Task</button>
-                        <button onClick={handleDelete}>Delete Task</button>
+                        <div className="details-btn-container">
+                            <button className="modal-btn details-btn edit-btn" onClick={() => setIsEditing(true)}>Edit Task</button>
+                            <button className="modal-btn details-btn delete-btn" onClick={handleDelete}>Delete Task</button>
+                        </div>
                     </div>
                 )}
             </div>

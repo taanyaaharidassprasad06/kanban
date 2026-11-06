@@ -68,8 +68,8 @@ function TaskModal({ onAdd, onClose }: TaskModalProps) {
                         </div>
                     </fieldset>
                     <div className="modal-btn-container">
-                        <button className="btn modal-btn" type="submit">Save Task</button>
-                        <button className="btn modal-btn" type="button" onClick={onClose}>Cancel</button>
+                        <button className="modal-btn" type="button" onClick={onClose}>Cancel</button>
+                        <button className="modal-btn create-task-btn" type="submit">Create Task</button>
                     </div>
                 </form>
             </div>
