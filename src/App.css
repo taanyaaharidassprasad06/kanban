@@ -1,5 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans&display=swap');
 
+:root {
+    --primary: rgb(64, 118, 235);
+    --primary-hover: rgb(54, 89, 217);
+    --overdue-tag: rgb(255, 67, 67);
+    --overdue-bg: rgba(176, 41, 41, 0.08);
+    --overdue-border: rgba(235, 64, 64, 0.35);
+    --overdue-color: rgb(190, 40, 40);
+    --priority-bg: rgb(220, 223, 248);
+    --priority-border: rgb(169, 176, 233);
+    --column-bg: rgba(64, 107, 235, 0.08);
+}
+
+.app[data-theme="pink"] {
+    --primary: rgb(235, 64, 141);
+    --primary-hover: rgb(217, 54, 127); 
+    --priority-bg: rgb(248, 220, 232);
+    --priority-border: rgb(233, 169, 196);
+    --column-bg: rgba(235, 64, 141, 0.08);
+}
+
+.app[data-theme="purple"] {
+    --primary: rgb(152, 64, 235);
+    --primary-hover: rgb(133, 54, 217);
+    --priority-bg: rgb(234, 220, 248);
+    --priority-border: rgb(209, 169, 233);
+    --column-bg: rgba(158, 64, 235, 0.08);
+}
+
+.app[data-theme="green"] {
+    --primary: rgb(47, 161, 51);
+    --primary-hover: rgb(43, 144, 46);
+    --priority-bg: rgb(220, 248, 228);
+    --priority-border: rgb(169, 233, 185);
+    --column-bg: rgba(41, 176, 59, 0.08);
+}
+
+.app[data-theme="orange"] {
+    --primary: rgb(235, 141, 64);
+    --primary-hover: rgb(217, 136, 54);
+    --priority-bg: rgb(248, 234, 220);
+    --priority-border: rgb(233, 204, 169);
+    --column-bg: rgba(235, 158, 64, 0.08);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -29,6 +73,33 @@ button {
     min-height: 0;
 }
 
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.color-picker {
+    display: flex;
+    gap: 10px;
+}
+
+.color-swatch {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid white;
+    outline: 1px solid rgb(230, 230, 230);
+    cursor: pointer;
+}
+
+.color-swatch.blue { background: rgb(64, 118, 235); }
+.color-swatch.pink { background: rgb(235, 64, 141); }
+.color-swatch.purple { background: rgb(152, 64, 235); }
+.color-swatch.green { background: rgb(47, 161, 51); }
+.color-swatch.orange { background: rgb(235, 141, 64); }
+
 .kanban-board {
     display: flex;
     flex-direction: row;
@@ -38,7 +109,7 @@ button {
 }
 
 .add-task-btn {
-    background-color: rgb(235, 64, 141);
+    background-color: var(--primary);
     border-radius: 10px;
     color: white;
     border: none;
@@ -46,7 +117,7 @@ button {
 }
 
 .add-task-btn:hover {
-    background-color: rgb(217, 54, 127);
+    background-color: var(--primary-hover);
     cursor: pointer;
 }
 
@@ -77,9 +148,9 @@ button {
 }
 
 .summary-card.overdue {
-    background-color: rgba(235, 64, 141, 0.08);
-    border-color: rgba(235, 64, 141, 0.35);
-    color: rgb(190, 40, 105);
+    background-color: var(--overdue-bg);
+    border-color: var(--overdue-border);
+    color: var(--overdue-color);
 }
 
 .kanban {
@@ -95,7 +166,7 @@ button {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background-color: rgb(245, 244, 244);
+    background-color: var(--column-bg);
     padding: 16px;
     border-radius: 15px;
     border: 1px solid rgb(230, 230, 230);
@@ -106,6 +177,7 @@ button {
 .col-info {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     gap: 15px;
 }
@@ -115,7 +187,8 @@ button {
 }
 
 .task-amt {
-    background-color: rgb(228, 226, 226);
+    background-color: var(--primary);
+    color: white;
     padding: 5px 15px;
     border-radius: 20px;
 }
@@ -186,8 +259,8 @@ button {
 }
 
 .priority-selected {
-    background-color: #f8dce8;
-    border-color: #e9a9c4;
+    background-color: var(--priority-bg);
+    border-color: var(--priority-border);
 }
 
 .modal-btn-container {
@@ -196,13 +269,13 @@ button {
 }
 
 .create-task-btn, .save-task-btn, .edit-btn {
-    background-color: rgb(235, 64, 141);
+    background-color: var(--primary);
     color: white;
     border: none;
 }
 
 .create-task-btn:hover, .save-task-btn:hover, .edit-btn:hover {
-    background-color: rgb(217, 54, 127);
+    background-color: var(--primary-hover);
 }
 
 /* TASK CARD STYLES */
@@ -229,7 +302,7 @@ button {
 
 .task-card.overdue {
     border: 1px solid rgb(230, 230, 230);
-    border-left: 4px solid rgb(250, 126, 181);
+    border-left: 4px solid var(--overdue-tag);
 }
 
 .task-info {
@@ -292,7 +365,7 @@ button {
 }
 
 .details-header button {
-    background-color: rgb(235, 64, 141);
+    background-color: var(--primary);
     color: white;
     border: none;
     font-size: 20px;
@@ -302,7 +375,7 @@ button {
 }
 
 .details-header button:hover {
-    background-color: rgb(217, 54, 127);
+    background-color: var(--primary-hover);
 }
 
 .details-content {

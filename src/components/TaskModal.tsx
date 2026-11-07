@@ -22,6 +22,8 @@ function TaskModal({ onAdd, onClose }: TaskModalProps) {
     function handleSave(e: SubmitEvent<HTMLFormElement>) {
         // prevent browser from refreshing page
         e.preventDefault();
+
+        console.log("Selected due date:", due);
         
         const taskTitle = title.trim();
         
@@ -73,7 +75,6 @@ function TaskModal({ onAdd, onClose }: TaskModalProps) {
                     </div>
                 </form>
             </div>
-            
         </div>
     );
 }

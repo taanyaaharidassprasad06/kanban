@@ -14,14 +14,15 @@ const cols: { id: TaskStatus; label: string }[] = [
 
 interface BoardProps {
     userId: string;
+    onThemeChange: (theme: string) => void;
 }
 
-function Board({ userId }: BoardProps) {
+function Board({ userId, onThemeChange }: BoardProps) {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [dragId, setDragId] = useState<string | null>(null); // stores which task is currently being dragged
     const [selectedTask, setSelectedTask] = useState<Task | null>(null);
-
+    
     const totalTasks = tasks.length;
 
     const completedTasks = tasks.filter(
@@ -131,8 +132,17 @@ function Board({ userId }: BoardProps) {
     return (
         <>
             <div className="board">
-                <div className="kanban-board">
+                <div className="header">
                     <h1>Kanban Board</h1>
+                    <div className="color-picker">
+                        <button className="color-swatch blue" onClick={() => onThemeChange("blue")} />
+                        <button className="color-swatch pink" onClick={() => onThemeChange("pink")} />
+                        <button className="color-swatch purple" onClick={() => onThemeChange("purple")} />
+                        <button className="color-swatch green" onClick={() => onThemeChange("green")} />
+                        <button className="color-swatch orange" onClick={() => onThemeChange("orange")} />
+                    </div>
+                </div>
+                <div className="kanban-board">
                     <div className="board-summary">
                         <div className="summary-card">
                             <h4>Total Tasks</h4>

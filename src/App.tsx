@@ -8,6 +8,7 @@ function App() {
 	const [user, setUser] = useState<User | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
+	const [theme, setTheme] = useState<string>("blue");
 
 	// initialize guest session when app first loads
 	useEffect(() => {
@@ -36,8 +37,8 @@ function App() {
 	}
 	
 	return (
-		<div className="app">
-			<Board userId={user.id}/>
+		<div className="app" data-theme={theme}>
+			<Board userId={user.id} onThemeChange={setTheme}/>
 		</div>
 	);
 }

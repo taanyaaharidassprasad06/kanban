@@ -30,7 +30,7 @@ function TaskCard({ task, onDragStart, onSelectTask }: TaskCardProps) {
                 </p>
             {task.due_date && (
                 <p className="task-date">
-                    {new Date(task.due_date).toLocaleDateString()}
+                    {new Date(task.due_date + "T00:00:00").toLocaleDateString()}
                 </p>
             )}
             </div>
